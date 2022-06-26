@@ -10,6 +10,7 @@ class Service:
     def __init__(self) -> None:
         self.action_center_is_open = False
         self.hotspot_button_location = None
+        self.hotspot_turned_on = False
 
     def _get_hotspot_button_location(self) -> Union[Tuple[int, int], None]:
         """Get hotpost button location"""
@@ -28,13 +29,14 @@ class Service:
         """Opens windows action center"""
         pyautogui.hotkey("win", "a")
         self.action_center_is_open = True
-        
+
     def click_hotspot_button(self) -> None:
         """Click windows hotspot button"""
         if not self.hotspot_button_location:
             raise Exception("Hotspot button cannot be found.")
         button_x, button_y = self.hotspot_button_location
         pyautogui.click(button_x, button_y)
+        self.hotspot_turned_on = True
 
     def _scape_action_center(self) -> None:
         """Escape windows action center"""

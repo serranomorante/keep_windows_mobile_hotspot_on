@@ -26,3 +26,10 @@ def test_locate_hotspot_button_success(service):
     location = service.locate_hotspot_button()
     assert location is not None
     assert service.hotspot_button_location is not None
+
+
+def test_click_hotspot_button(service):
+    service._open_action_center()
+    service.locate_hotspot_button()
+    service.click_hotspot_button()
+    assert service.hotspot_turned_on

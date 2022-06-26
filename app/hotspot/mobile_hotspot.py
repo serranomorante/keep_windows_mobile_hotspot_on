@@ -1,3 +1,5 @@
+import time
+
 from app.services.service import Service
 
 class MobileHotspot:
@@ -22,5 +24,6 @@ class MobileHotspot:
         """Start the script"""
         hotspot_is_on = self.hotspot_is_on()
         if not hotspot_is_on:
+            time.sleep(0.25)
             self.turn_mobile_hotspot_on()
         self.exit()
