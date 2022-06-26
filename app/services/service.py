@@ -35,10 +35,14 @@ class Service:
         if not self.hotspot_button_location:
             raise Exception("Hotspot button cannot be found.")
         button_x, button_y = self.hotspot_button_location
-        pyautogui.click(button_x, button_y)
+        pyautogui.moveTo(button_x, button_y)
+        time.sleep(0.75)
+        pyautogui.click()
         self.hotspot_turned_on = True
 
     def _scape_action_center(self) -> None:
         """Escape windows action center"""
         pyautogui.press("esc")
+        self.action_center_is_open = False
+        self.hotspot_button_location = None
         time.sleep(0.25)

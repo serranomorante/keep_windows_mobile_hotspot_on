@@ -16,7 +16,7 @@ class MobileHotspot:
     def hotspot_is_on(self) -> bool:
         """Check windows mobile hotspot is on"""
         return self.service.hotspot_button_location is not None
-    
+
     def exit(self) -> None:
         return self.service._scape_action_center()
 
@@ -24,6 +24,5 @@ class MobileHotspot:
         """Start the script"""
         hotspot_is_on = self.hotspot_is_on()
         if not hotspot_is_on:
-            time.sleep(0.25)
             self.turn_mobile_hotspot_on()
         self.exit()
