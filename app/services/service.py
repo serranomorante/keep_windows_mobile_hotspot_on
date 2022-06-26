@@ -1,13 +1,16 @@
 from typing import Tuple, Union
 
-import time
-
 import pyautogui
+
+MONITOR_SIZE_X = 1366
+MONITOR_SIZE_Y = 768
+DEFAULT_PAUSE = 2.5
 
 
 class Service:
     """GUI control service"""
     def __init__(self) -> None:
+        pyautogui.PAUSE = DEFAULT_PAUSE
         self.action_center_is_open = False
         self.hotspot_button_location = None
         self.hotspot_turned_on = False
@@ -35,8 +38,7 @@ class Service:
         if not self.hotspot_button_location:
             raise Exception("Hotspot button cannot be found.")
         button_x, button_y = self.hotspot_button_location
-        pyautogui.moveTo(button_x, button_y)
-        time.sleep(0.75)
+        pyautogui.moveTo(button_x, button_y, duration=0.5)
         pyautogui.click()
         self.hotspot_turned_on = True
 
@@ -45,4 +47,3 @@ class Service:
         pyautogui.press("esc")
         self.action_center_is_open = False
         self.hotspot_button_location = None
-        time.sleep(0.25)
