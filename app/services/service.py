@@ -11,9 +11,16 @@ class Service:
         self.action_center_is_open = False
         self.hotspot_button_location = None
 
+    def _get_hotspot_button_location(self) -> Union[Tuple[int, int], None]:
+        """Get hotpost button location"""
+        for i in range(2):
+            i += 1
+            location = pyautogui.locateCenterOnScreen(f"hotspot_screenshots/hotspot{i}.png", confidence=0.7)
+            if location: return location
+
     def locate_hotspot_button(self) -> Union[Tuple[int, int], None]:
         """Locate the hotspot button on the screen"""
-        location = pyautogui.locateCenterOnScreen("hotspot.png", confidence=0.7)
+        location = self._get_hotspot_button_location()
         self.hotspot_button_location = location
         return location
 
