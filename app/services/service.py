@@ -2,9 +2,7 @@ from typing import Tuple, Union
 
 import pyautogui
 
-MONITOR_SIZE_X = 1366
-MONITOR_SIZE_Y = 768
-DEFAULT_PAUSE = 2.5
+DEFAULT_PAUSE = 1
 
 
 class Service:
@@ -19,7 +17,7 @@ class Service:
         """Get hotpost button location"""
         for i in range(2):
             i += 1
-            location = pyautogui.locateCenterOnScreen(f"hotspot_screenshots/hotspot{i}.png", confidence=0.7)
+            location = pyautogui.locateCenterOnScreen(f"hotspot_screenshots/button_off_{i}.png", confidence=0.7)
             if location: return location
 
     def locate_hotspot_button(self) -> Union[Tuple[int, int], None]:
