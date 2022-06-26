@@ -13,7 +13,7 @@ class Service:
 
     def locate_hotspot_button(self) -> Union[Tuple[int, int], None]:
         """Locate the hotspot button on the screen"""
-        location = pyautogui.locateCenterOnScreen("hotspot.png", confidence=0.8)
+        location = pyautogui.locateCenterOnScreen("hotspot.png", confidence=0.7)
         self.hotspot_button_location = location
         return location
 
