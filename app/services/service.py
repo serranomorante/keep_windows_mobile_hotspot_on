@@ -3,6 +3,7 @@ from typing import Tuple, Union
 import pyautogui
 
 DEFAULT_PAUSE = 1
+WINDOWS_11 = 3
 
 
 class Service:
@@ -13,11 +14,21 @@ class Service:
         self.hotspot_button_location = None
         self.hotspot_turned_on = False
 
+    def _force_hotspot_button_offset(
+            self, location: Tuple[int, int]
+        ) -> Tuple[int, int]:
+        """Windows 11 needs a y offset"""
+        X = 0
+        Y = 1
+        Y_WITH_OFFSET = location[Y] - 50
+        return [location[X], Y_WITH_OFFSET]
+
     def _get_hotspot_button_location(self) -> Union[Tuple[int, int], None]:
         """Get hotpost button location"""
         for i in range(2):
             i += 1
             location = pyautogui.locateCenterOnScreen(f"hotspot_screenshots/button_off_{i}.png", confidence=0.7)
+            if location and i == WINDOWS_11: return self._force_hotspot_button_offset(location)
             if location: return location
 
     def locate_hotspot_button(self) -> Union[Tuple[int, int], None]:
