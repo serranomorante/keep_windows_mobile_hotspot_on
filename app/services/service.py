@@ -25,7 +25,7 @@ class Service:
 
     def _get_hotspot_button_location(self) -> Union[Tuple[int, int], None]:
         """Get hotpost button location"""
-        for i in range(2):
+        for i in range(3):
             i += 1
             location = pyautogui.locateCenterOnScreen(f"hotspot_screenshots/button_off_{i}.png", confidence=0.7)
             if location and i == WINDOWS_11: return self._force_hotspot_button_offset(location)
